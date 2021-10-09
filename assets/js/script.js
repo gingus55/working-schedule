@@ -1,8 +1,8 @@
 let baseArray = [
-  { id: 9, time: "9AM", text: "9am" },
-  { id: 10, time: "10AM", text: "10am" },
-  { id: 11, time: "11AM", text: "11am" },
-  { id: 12, time: "12AM", text: "12am" },
+  { id: 9, time: "9AM", text: "" },
+  { id: 10, time: "10AM", text: "" },
+  { id: 11, time: "11AM", text: "" },
+  { id: 12, time: "12AM", text: "" },
   { id: 13, time: "1PM", text: "" },
   { id: 14, time: "2PM", text: "" },
   { id: 15, time: "3PM", text: "" },
@@ -14,16 +14,27 @@ const mainContainer = $(".container");
 const scheduleData = JSON.parse(localStorage.getItem("schedule")) || [];
 const date = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
 
-console.log(date);
+const timerTick = function () {
+    
+    const clockContainer = $("#clock")
+    const dateTime = moment();
+    const dateTimeFormatted = dateTime.format('dddd, Do MMMM, YYYY kk:mm:ss');
+
+    clockContainer.text(dateTimeFormatted);
+  };
+
+  const timer = setInterval(timerTick, 1000);
+
+// console.log(date);
 
 const constructTimeBlocks = function (baseArray) {
   // construct each time block
   constructTimeBlock = function (each) {
     return `<div class="row block">
-  <div class="col-1 time">
+  <div class="col-2 time">
     ${each.time}
   </div>
-  <div class="col-10 future activity">
+  <div class="col-9 future activity">
     <textarea id="action">${each.text}</textarea>
   </div>
   <div class="col-1 buttonbox saveBtn">
