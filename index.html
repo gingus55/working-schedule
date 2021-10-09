@@ -30,13 +30,23 @@
     </header>
     <div class="container">
       <!-- Timeblocks go here -->
-      <div class="block">
-      <div>9AM</div>
-      <div class="future"><textarea></textarea></div>
-      <div><button class="saveBtn">Save</button><div>
-
+      
+    <div class="row block">
+      <div class="col-1 time">
+        9AM
+      </div>
+      <div class="col-10 future activity">
+        <textarea id="action"></textarea>
+      </div>
+      <div class="col-1 buttonbox saveBtn">
+        <div class="align-items-center row save"><i class=" far fa-save"></i></div>
+        <div class="align-items-center row delete"><i class="fas fa-dumpster"></i></div>
       </div>
     </div>
+    
+
+  </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>

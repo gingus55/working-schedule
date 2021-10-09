@@ -2,6 +2,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   line-height: 1;
+  box-sizing: border-box;
 }
 
 textarea {
@@ -9,8 +10,9 @@ textarea {
   border: none;
   resize: none;
   color: #000000;
-  border-left: 1px solid black;
+  /* border-left: 1px solid black; */
   padding: 10px;
+  width: 100%;
 }
 
 .jumbotron {
@@ -63,6 +65,14 @@ textarea {
   border-bottom-right-radius: 15px;
   background-color: #06aed5;
   color: white;
+  /* flex: 1; */
+  align-items: center;
+  /* flex-basis:10%; */
+  /* justify-content: center;
+  display: flex;
+  flex-direction: column; */
+  /* border: 1px solid black;  */
+
 }
 
 .saveBtn i:hover {
@@ -73,8 +83,59 @@ textarea {
 /* MY CSS begins here */
 .container{
  display: flex;
+ flex-direction: column;
+ box-sizing: border-box;
+
+ 
 }
 
 .block{
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* max-width: max-content; */
+  /* border: 1px solid black; */
+  /* width: 100%; */
+  box-sizing: border-box;
+  flex: 1;
+  text-align: center;
+}
+
+.time{
+  /* flex: 1; */
+  /* flex-basis:10%; */
+  border: 1px solid black;
+  border-top-left-radius: 5%;
+  border-bottom-left-radius: 5%;
+
+  /* width:10%; */
+
+}
+
+.activity{
+  /* flex: 5; */
+  width: 100%;
+  flex-basis:80%;
+}
+
+.buttonbox {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  /* justify-content: centre; */
+  /* border: 1px solid black;  */
+  /* align-content: center; */
+  
+}
+
+.save {
+  border: 1px solid black; 
+  flex-basis: 50%;
+  width: auto;
+}
+
+.delete {
+  border: 1px solid black; 
+  flex-basis: 50%;
+
 }
