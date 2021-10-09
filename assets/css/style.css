@@ -5,6 +5,10 @@ body {
   box-sizing: border-box;
 }
 
+i{
+  pointer-events: none;
+}
+
 textarea {
   background: transparent;
   border: none;
@@ -71,7 +75,7 @@ textarea {
   /* justify-content: center;
   display: flex;
   flex-direction: column; */
-  /* border: 1px solid black;  */
+  border: 1px solid black; 
 
 }
 
@@ -129,13 +133,13 @@ textarea {
 }
 
 .save {
-  border: 1px solid black; 
+  /* border: 1px solid black;  */
   flex-basis: 50%;
   width: auto;
 }
 
 .delete {
-  border: 1px solid black; 
+  /* border: 1px solid black;  */
   flex-basis: 50%;
 
 }
