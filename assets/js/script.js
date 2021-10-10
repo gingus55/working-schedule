@@ -16,7 +16,10 @@ const initialiseLocalStorage = function(baseArray){
     
     localStorage.setItem("schedule",JSON.stringify(scheduleData));
     
+    return scheduleData
 }
+
+const scheduleData = initialiseLocalStorage(baseArray);
 
 const mainContainer = $(".container");
 
@@ -35,7 +38,7 @@ const timerTick = function () {
 
 // console.log(date);
 
-const constructTimeBlocks = function (baseArray) {
+const constructTimeBlocks = function (scheduleData) {
   // construct each time block
   constructTimeBlock = function (each) {
     return `<div class="row block">
@@ -43,7 +46,7 @@ const constructTimeBlocks = function (baseArray) {
     ${each.time}
   </div>
   <div class="col-9 future activity">
-    <textarea name="action${each.id}" id="action${each.id}"></textarea>
+    <textarea name="action${each.id}" id="action${each.id}">${each.text}</textarea>
   </div>
   <div class="col-1 buttonbox saveBtn">
     <div id="saveBtn" data-log="${each.id}" class="px-3 clicker align-items-center row save"><i class=" far fa-save"></i></div>
@@ -52,12 +55,12 @@ const constructTimeBlocks = function (baseArray) {
 </div>`;
   };
   //   console.log(baseArray);
-  return baseArray.map(constructTimeBlock).join("");
+  return scheduleData.map(constructTimeBlock).join("");
 };
 
-const renderTimeBlocks = function (baseArray) {
+const renderTimeBlocks = function (scheduleData) {
   // create blocks
-  const blocks = constructTimeBlocks(baseArray);
+  const blocks = constructTimeBlocks(scheduleData);
   // append blocks
   mainContainer.append(blocks);
 };
@@ -67,7 +70,7 @@ const onReady = function () {
 
   initialiseLocalStorage(baseArray);
 
-  renderTimeBlocks(baseArray);
+  renderTimeBlocks(scheduleData);
 
   const handleClick = function (event) {
     const target = $(event.target);
@@ -76,11 +79,19 @@ const onReady = function () {
     let textBox = document.getElementById(activityTarget);
 
     if (target.is("#saveBtn")) {
-        console.log(textBox.value);
-      
-    //   console.log(log);
+        // console.log(textBox.value);
+        const arr = JSON.parse(localStorage.getItem("schedule"));
+        arr[log-9].text = textBox.value;
+        // console.log(arr);
 
-    //   console.log("click");
+        localStorage.setItem("schedule",JSON.stringify(arr));
+
+    if (target.is("#binBtn")) {
+        const arr = JSON.parse(localStorage.getItem("schedule"));
+        arr[log-9].text = "";
+
+        localStorage.setItem("schedule",JSON.stringify(arr));
+    }
     }
   };
 
