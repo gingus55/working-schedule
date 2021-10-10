@@ -74,6 +74,9 @@ const onReady = function () {
 
   const handleClick = function (event) {
     const target = $(event.target);
+
+    // console.log(target);
+
     const log = target.attr("data-log");
     let activityTarget = "action"+log;
     let textBox = document.getElementById(activityTarget);
@@ -85,14 +88,15 @@ const onReady = function () {
         // console.log(arr);
 
         localStorage.setItem("schedule",JSON.stringify(arr));
-
+    }
     if (target.is("#binBtn")) {
         const arr = JSON.parse(localStorage.getItem("schedule"));
         arr[log-9].text = "";
-
+        // console.log("click");
         localStorage.setItem("schedule",JSON.stringify(arr));
+        textBox.value = "";
     }
-    }
+    
   };
 
   mainContainer.on("click", handleClick);
