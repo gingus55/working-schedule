@@ -10,14 +10,13 @@ let baseArray = [
   { id: 17, time: "5PM", text: "" },
 ];
 
-// const initialiseLocalStorage = function(baseArray){
-//     const scheduleData = JSON.parse(localStorage.getItem("schedule")) || [];
+const initialiseLocalStorage = function(baseArray){
 
-//     console.log(scheduleData);
-    // scheduleData.push(baseArray);
-    // localStorage.setItem("schedule",JSON.stringify(baseArray));
-    // console.log(baseArray);
-// }
+    const scheduleData = JSON.parse(localStorage.getItem("schedule")) || baseArray;
+    
+    localStorage.setItem("schedule",JSON.stringify(scheduleData));
+    
+}
 
 const mainContainer = $(".container");
 
@@ -66,7 +65,7 @@ const renderTimeBlocks = function (baseArray) {
 const onReady = function () {
   console.log("hello world");
 
-//   initialiseLocalStorage(baseArray);
+  initialiseLocalStorage(baseArray);
 
   renderTimeBlocks(baseArray);
 
