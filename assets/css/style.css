@@ -14,7 +14,6 @@ textarea {
   border: none;
   resize: none;
   color: #000000;
-  /* border-left: 1px solid black; */
   padding: 10px;
   width: 100%;
 }
@@ -69,12 +68,7 @@ textarea {
   border-bottom-right-radius: 15px;
   background-color: #06aed5;
   color: white;
-  /* flex: 1; */
   align-items: center;
-  /* flex-basis:10%; */
-  /* justify-content: center;
-  display: flex;
-  flex-direction: column; */
   border: 1px solid black; 
 
 }
@@ -89,35 +83,24 @@ textarea {
  display: flex;
  flex-direction: column;
  box-sizing: border-box;
-
- 
 }
 
 .block{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  /* max-width: max-content; */
-  /* border: 1px solid black; */
-  /* width: 100%; */
   box-sizing: border-box;
   flex: 1;
   text-align: center;
 }
 
 .time{
-  /* flex: 1; */
-  /* flex-basis:10%; */
   border: 1px solid black;
   border-top-left-radius: 5%;
   border-bottom-left-radius: 5%;
-
-  /* width:10%; */
-
 }
 
 .activity{
-  /* flex: 5; */
   width: 100%;
   flex-basis:80%;
 }
@@ -125,21 +108,54 @@ textarea {
 .buttonbox {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  /* justify-content: centre; */
-  /* border: 1px solid black;  */
-  /* align-content: center; */
-  
+  flex-wrap: wrap; 
 }
 
 .save {
-  /* border: 1px solid black;  */
   flex-basis: 50%;
   width: auto;
 }
 
 .delete {
-  /* border: 1px solid black;  */
   flex-basis: 50%;
+}
 
+@media screen and (max-width: 576px){
+
+  .block{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .activity{
+    width: 50%;
+  }
+
+  .time{
+    border: none;
+  }
+
+  .buttonbox {
+    width: 100px;
+    justify-content: space-between;
+  }
+  
+  .saveBtn {
+    border-left: none;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: white;
+    color: black;
+    margin-top: 15px;
+    align-items: center;
+    border: none; 
+  }
+
+  .delete {
+    margin-top: 20px;
+  }
+
+  .save {
+    margin-top: 20px;
+  }
 }
