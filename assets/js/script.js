@@ -10,48 +10,38 @@ let baseArray = [
   { id: 17, time: "5PM", text: "" },
 ];
 
-// console.log(currentHour);
+const initialiseLocalStorage = function (baseArray) {
+  const scheduleData =
+    JSON.parse(localStorage.getItem("schedule")) || baseArray;
 
-const initialiseLocalStorage = function(baseArray){
+  localStorage.setItem("schedule", JSON.stringify(scheduleData));
 
-    const scheduleData = JSON.parse(localStorage.getItem("schedule")) || baseArray;
-    
-    localStorage.setItem("schedule",JSON.stringify(scheduleData));
-    
-    return scheduleData
-}
+  return scheduleData;
+};
 
 const scheduleData = initialiseLocalStorage(baseArray);
-
 const mainContainer = $(".container");
-
 const date = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
 
 const timerTick = function () {
-    
-    const clockContainer = $("#clock")
-    const dateTime = moment();
-    const dateTimeFormatted = dateTime.format('dddd, Do MMMM, YYYY kk:mm:ss');
+  const clockContainer = $("#clock");
+  const dateTime = moment();
+  const dateTimeFormatted = dateTime.format("dddd, Do MMMM, YYYY kk:mm:ss");
 
-    clockContainer.text(dateTimeFormatted);
-  };
+  clockContainer.text(dateTimeFormatted);
+};
 
-  const timer = setInterval(timerTick, 1000);
-
-// console.log(date);
+const timer = setInterval(timerTick, 1000);
 
 const constructTimeBlocks = function (scheduleData) {
-  // construct each time block
-
   constructTimeBlock = function (each) {
     const currentHour = moment().hour();
     console.log(currentHour);
     const blockTime = each.id;
     console.log(blockTime);
 
-    if (blockTime<currentHour){
-    
-    return `<div class="row block">
+    if (blockTime < currentHour) {
+      return `<div class="row block">
   <div class="col-2 time">
     ${each.time}
   </div>
@@ -63,8 +53,8 @@ const constructTimeBlocks = function (scheduleData) {
     <div id="binBtn" data-log="${each.id}" class="px-3 clicker align-items-center row delete"><i class="fas fa-dumpster"></i></div>
   </div>
 </div>`;
-    } else if (blockTime===currentHour){
-return `<div class="row block">
+    } else if (blockTime === currentHour) {
+      return `<div class="row block">
   <div class="col-2 time">
     ${each.time}
   </div>
@@ -77,7 +67,7 @@ return `<div class="row block">
   </div>
 </div>`;
     } else {
-return `<div class="row block">
+      return `<div class="row block">
 <div class="col-2 time">
   ${each.time}
 </div>
@@ -91,14 +81,12 @@ return `<div class="row block">
 </div>`;
     }
   };
-  //   console.log(baseArray);
   return scheduleData.map(constructTimeBlock).join("");
 };
 
 const renderTimeBlocks = function (scheduleData) {
-  // create blocks
   const blocks = constructTimeBlocks(scheduleData);
-  // append blocks
+
   mainContainer.append(blocks);
 };
 
