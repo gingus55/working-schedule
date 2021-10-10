@@ -72,20 +72,16 @@ const onReady = function () {
 
   const handleClick = function (event) {
     const target = $(event.target);
-    // const attr = target.attr("id");
     const log = target.attr("data-log");
     let activityTarget = "action"+log;
-    let textBox = $("#action9");
-    // console.log(textBox);
-    // const newText = 
-    let textContent = textBox.value;
+    let textBox = document.getElementById(activityTarget);
 
     if (target.is("#saveBtn")) {
-        console.log(textBox.val());
+        console.log(textBox.value);
       
     //   console.log(log);
 
-      console.log("click");
+    //   console.log("click");
     }
   };
 
