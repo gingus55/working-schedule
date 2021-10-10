@@ -10,8 +10,17 @@ let baseArray = [
   { id: 17, time: "5PM", text: "" },
 ];
 
+// const initialiseLocalStorage = function(baseArray){
+//     const scheduleData = JSON.parse(localStorage.getItem("schedule")) || [];
+
+//     console.log(scheduleData);
+    // scheduleData.push(baseArray);
+    // localStorage.setItem("schedule",JSON.stringify(baseArray));
+    // console.log(baseArray);
+// }
+
 const mainContainer = $(".container");
-const scheduleData = JSON.parse(localStorage.getItem("schedule")) || [];
+
 const date = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
 
 const timerTick = function () {
@@ -35,7 +44,7 @@ const constructTimeBlocks = function (baseArray) {
     ${each.time}
   </div>
   <div class="col-9 future activity">
-    <textarea id="action">${each.text}</textarea>
+    <textarea name="action${each.id}" id="action${each.id}"></textarea>
   </div>
   <div class="col-1 buttonbox saveBtn">
     <div id="saveBtn" data-log="${each.id}" class="px-3 clicker align-items-center row save"><i class=" far fa-save"></i></div>
@@ -57,17 +66,24 @@ const renderTimeBlocks = function (baseArray) {
 const onReady = function () {
   console.log("hello world");
 
+//   initialiseLocalStorage(baseArray);
+
   renderTimeBlocks(baseArray);
 
   const handleClick = function (event) {
     const target = $(event.target);
-    const attr = target.attr("id");
+    // const attr = target.attr("id");
     const log = target.attr("data-log");
+    let activityTarget = "action"+log;
+    let textBox = $("#action9");
+    // console.log(textBox);
+    // const newText = 
+    let textContent = textBox.value;
 
     if (target.is("#saveBtn")) {
-      const textContent = baseArray[log - 9].text;
-      console.log(textContent);
-      console.log(log);
+        console.log(textBox.val());
+      
+    //   console.log(log);
 
       console.log("click");
     }
