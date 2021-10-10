@@ -10,6 +10,8 @@ let baseArray = [
   { id: 17, time: "5PM", text: "" },
 ];
 
+// console.log(currentHour);
+
 const initialiseLocalStorage = function(baseArray){
 
     const scheduleData = JSON.parse(localStorage.getItem("schedule")) || baseArray;
@@ -40,12 +42,20 @@ const timerTick = function () {
 
 const constructTimeBlocks = function (scheduleData) {
   // construct each time block
+
   constructTimeBlock = function (each) {
+    const currentHour = moment().hour();
+    console.log(currentHour);
+    const blockTime = each.id;
+    console.log(blockTime);
+
+    if (blockTime<currentHour){
+    
     return `<div class="row block">
   <div class="col-2 time">
     ${each.time}
   </div>
-  <div class="col-9 future activity">
+  <div class="col-9 past activity">
     <textarea name="action${each.id}" id="action${each.id}">${each.text}</textarea>
   </div>
   <div class="col-1 buttonbox saveBtn">
@@ -53,6 +63,33 @@ const constructTimeBlocks = function (scheduleData) {
     <div id="binBtn" data-log="${each.id}" class="px-3 clicker align-items-center row delete"><i class="fas fa-dumpster"></i></div>
   </div>
 </div>`;
+    } else if (blockTime===currentHour){
+return `<div class="row block">
+  <div class="col-2 time">
+    ${each.time}
+  </div>
+  <div class="col-9 present activity">
+    <textarea name="action${each.id}" id="action${each.id}">${each.text}</textarea>
+  </div>
+  <div class="col-1 buttonbox saveBtn">
+    <div id="saveBtn" data-log="${each.id}" class="px-3 clicker align-items-center row save"><i class=" far fa-save"></i></div>
+    <div id="binBtn" data-log="${each.id}" class="px-3 clicker align-items-center row delete"><i class="fas fa-dumpster"></i></div>
+  </div>
+</div>`;
+    } else {
+return `<div class="row block">
+<div class="col-2 time">
+  ${each.time}
+</div>
+<div class="col-9 future activity">
+  <textarea name="action${each.id}" id="action${each.id}">${each.text}</textarea>
+</div>
+<div class="col-1 buttonbox saveBtn">
+  <div id="saveBtn" data-log="${each.id}" class="px-3 clicker align-items-center row save"><i class=" far fa-save"></i></div>
+  <div id="binBtn" data-log="${each.id}" class="px-3 clicker align-items-center row delete"><i class="fas fa-dumpster"></i></div>
+</div>
+</div>`;
+    }
   };
   //   console.log(baseArray);
   return scheduleData.map(constructTimeBlock).join("");
@@ -74,25 +111,21 @@ const onReady = function () {
 
   const handleClick = function (event) {
     const target = $(event.target);
-
-    // console.log(target);
-
     const log = target.attr("data-log");
     let activityTarget = "action"+log;
     let textBox = document.getElementById(activityTarget);
 
     if (target.is("#saveBtn")) {
-        // console.log(textBox.value);
+
         const arr = JSON.parse(localStorage.getItem("schedule"));
         arr[log-9].text = textBox.value;
-        // console.log(arr);
-
+ 
         localStorage.setItem("schedule",JSON.stringify(arr));
     }
     if (target.is("#binBtn")) {
         const arr = JSON.parse(localStorage.getItem("schedule"));
         arr[log-9].text = "";
-        // console.log("click");
+
         localStorage.setItem("schedule",JSON.stringify(arr));
         textBox.value = "";
     }
