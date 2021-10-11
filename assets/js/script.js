@@ -1,4 +1,4 @@
-let baseArray = [
+const baseArray = [
   { id: 9, time: "9AM", text: "" },
   { id: 10, time: "10AM", text: "" },
   { id: 11, time: "11AM", text: "" },
