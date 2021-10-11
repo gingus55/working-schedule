@@ -36,9 +36,7 @@ const timer = setInterval(timerTick, 1000);
 const constructTimeBlocks = function (scheduleData) {
   constructTimeBlock = function (each) {
     const currentHour = moment().hour();
-    console.log(currentHour);
     const blockTime = each.id;
-    console.log(blockTime);
 
     if (blockTime < currentHour) {
       return `<div class="row block">
@@ -91,8 +89,6 @@ const renderTimeBlocks = function (scheduleData) {
 };
 
 const onReady = function () {
-  console.log("hello world");
-
   initialiseLocalStorage(baseArray);
 
   renderTimeBlocks(scheduleData);
@@ -100,24 +96,22 @@ const onReady = function () {
   const handleClick = function (event) {
     const target = $(event.target);
     const log = target.attr("data-log");
-    let activityTarget = "action"+log;
+    let activityTarget = "action" + log;
     let textBox = document.getElementById(activityTarget);
 
     if (target.is("#saveBtn")) {
+      const arr = JSON.parse(localStorage.getItem("schedule"));
+      arr[log - 9].text = textBox.value;
 
-        const arr = JSON.parse(localStorage.getItem("schedule"));
-        arr[log-9].text = textBox.value;
- 
-        localStorage.setItem("schedule",JSON.stringify(arr));
+      localStorage.setItem("schedule", JSON.stringify(arr));
     }
     if (target.is("#binBtn")) {
-        const arr = JSON.parse(localStorage.getItem("schedule"));
-        arr[log-9].text = "";
+      const arr = JSON.parse(localStorage.getItem("schedule"));
+      arr[log - 9].text = "";
 
-        localStorage.setItem("schedule",JSON.stringify(arr));
-        textBox.value = "";
+      localStorage.setItem("schedule", JSON.stringify(arr));
+      textBox.value = "";
     }
-    
   };
 
   mainContainer.on("click", handleClick);
