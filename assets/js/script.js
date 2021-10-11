@@ -36,27 +36,23 @@ const timer = setInterval(timerTick, 1000);
 const constructTimeBlocks = function (scheduleData) {
   constructTimeBlock = function (each) {
     const currentHour = moment().hour();
+
     const blockTime = each.id;
+    let timeClass;
 
     if (blockTime < currentHour) {
-      return `<div class="row block">
-  <div class="col-2 time">
-    ${each.time}
-  </div>
-  <div class="col-9 past activity">
-    <textarea name="action${each.id}" id="action${each.id}">${each.text}</textarea>
-  </div>
-  <div class="col-1 buttonbox saveBtn">
-    <div id="saveBtn" data-log="${each.id}" class="px-3 clicker align-items-center row save"><i class=" far fa-save"></i></div>
-    <div id="binBtn" data-log="${each.id}" class="px-3 clicker align-items-center row delete"><i class="fas fa-dumpster"></i></div>
-  </div>
-</div>`;
+      timeClass = "past";
     } else if (blockTime === currentHour) {
-      return `<div class="row block">
+      timeClass = "present";
+    } else {
+      timeClass = "future";
+    }
+
+    return `<div class="row block">
   <div class="col-2 time">
     ${each.time}
   </div>
-  <div class="col-9 present activity">
+  <div class="col-9 ${timeClass} activity">
     <textarea name="action${each.id}" id="action${each.id}">${each.text}</textarea>
   </div>
   <div class="col-1 buttonbox saveBtn">
@@ -64,21 +60,8 @@ const constructTimeBlocks = function (scheduleData) {
     <div id="binBtn" data-log="${each.id}" class="px-3 clicker align-items-center row delete"><i class="fas fa-dumpster"></i></div>
   </div>
 </div>`;
-    } else {
-      return `<div class="row block">
-<div class="col-2 time">
-  ${each.time}
-</div>
-<div class="col-9 future activity">
-  <textarea name="action${each.id}" id="action${each.id}">${each.text}</textarea>
-</div>
-<div class="col-1 buttonbox saveBtn">
-  <div id="saveBtn" data-log="${each.id}" class="px-3 clicker align-items-center row save"><i class=" far fa-save"></i></div>
-  <div id="binBtn" data-log="${each.id}" class="px-3 clicker align-items-center row delete"><i class="fas fa-dumpster"></i></div>
-</div>
-</div>`;
-    }
   };
+
   return scheduleData.map(constructTimeBlock).join("");
 };
 
