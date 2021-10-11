@@ -19,9 +19,7 @@ const initialiseLocalStorage = function (baseArray) {
   return scheduleData;
 };
 
-const scheduleData = initialiseLocalStorage(baseArray);
 const mainContainer = $(".container");
-const date = moment().format("dddd, MMMM Do YYYY, h:mm:ss a");
 
 const timerTick = function () {
   const clockContainer = $("#clock");
@@ -32,6 +30,21 @@ const timerTick = function () {
 };
 
 const timer = setInterval(timerTick, 1000);
+
+const blockHtml = function (each, timeClass) {
+  return `<div class="row block">
+  <div class="col-2 time">
+    ${each.time}
+  </div>
+  <div class="col-9 ${timeClass} activity">
+    <textarea name="action${each.id}" id="action${each.id}">${each.text}</textarea>
+  </div>
+  <div class="col-1 buttonbox saveBtn">
+    <div id="saveBtn" data-log="${each.id}" class="px-3 clicker align-items-center row save"><i class=" far fa-save"></i></div>
+    <div id="binBtn" data-log="${each.id}" class="px-3 clicker align-items-center row delete"><i class="fas fa-dumpster"></i></div>
+  </div>
+</div>`;
+};
 
 const constructTimeBlocks = function (scheduleData) {
   constructTimeBlock = function (each) {
@@ -48,18 +61,7 @@ const constructTimeBlocks = function (scheduleData) {
       timeClass = "future";
     }
 
-    return `<div class="row block">
-  <div class="col-2 time">
-    ${each.time}
-  </div>
-  <div class="col-9 ${timeClass} activity">
-    <textarea name="action${each.id}" id="action${each.id}">${each.text}</textarea>
-  </div>
-  <div class="col-1 buttonbox saveBtn">
-    <div id="saveBtn" data-log="${each.id}" class="px-3 clicker align-items-center row save"><i class=" far fa-save"></i></div>
-    <div id="binBtn" data-log="${each.id}" class="px-3 clicker align-items-center row delete"><i class="fas fa-dumpster"></i></div>
-  </div>
-</div>`;
+    return blockHtml(each, timeClass);
   };
 
   return scheduleData.map(constructTimeBlock).join("");
@@ -74,7 +76,7 @@ const renderTimeBlocks = function (scheduleData) {
 const onReady = function () {
   initialiseLocalStorage(baseArray);
 
-  renderTimeBlocks(scheduleData);
+  renderTimeBlocks(initialiseLocalStorage(baseArray));
 
   const handleClick = function (event) {
     const target = $(event.target);
@@ -101,3 +103,6 @@ const onReady = function () {
 };
 
 $(document).ready(onReady);
+
+
+
