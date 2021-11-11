@@ -1,11 +1,11 @@
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   line-height: 1;
   box-sizing: border-box;
 }
 
-i{
+i {
   pointer-events: none;
 }
 
@@ -68,24 +68,25 @@ textarea {
   border-bottom-right-radius: 15px;
   background-color: #06aed5;
   color: white;
+  justify-content: center;
   align-items: center;
-  border: 1px solid black; 
-
+  border: 1px solid black;
 }
 
 .saveBtn i:hover {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 /* MY CSS begins here */
-.container{
- display: flex;
- flex-direction: column;
- box-sizing: border-box;
+.container {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
-.block{
+.block {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -94,21 +95,21 @@ textarea {
   text-align: center;
 }
 
-.time{
+.time {
   border: 1px solid black;
   border-top-left-radius: 5%;
   border-bottom-left-radius: 5%;
 }
 
-.activity{
+.activity {
   width: 100%;
-  flex-basis:80%;
+  flex-basis: 80%;
 }
 
 .buttonbox {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
 }
 
 .save {
@@ -120,18 +121,17 @@ textarea {
   flex-basis: 50%;
 }
 
-@media screen and (max-width: 576px){
-
-  .block{
+@media screen and (max-width: 576px) {
+  .block {
     display: flex;
     flex-direction: column;
   }
 
-  .activity{
+  .activity {
     width: 50%;
   }
 
-  .time{
+  .time {
     border: none;
   }
 
@@ -139,7 +139,7 @@ textarea {
     width: 100px;
     justify-content: space-between;
   }
-  
+
   .saveBtn {
     border-left: none;
     border-top-right-radius: 0;
@@ -148,7 +148,7 @@ textarea {
     color: black;
     margin-top: 15px;
     align-items: center;
-    border: none; 
+    border: none;
   }
 
   .delete {

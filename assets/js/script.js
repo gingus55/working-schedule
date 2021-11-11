@@ -29,7 +29,7 @@ const timerTick = function () {
   clockContainer.text(dateTimeFormatted);
 };
 
-const timer = setInterval(timerTick, 1000);
+// const timer =
 
 const blockHtml = function (each, timeClass) {
   return `<div class="row block">
@@ -40,7 +40,7 @@ const blockHtml = function (each, timeClass) {
     <textarea name="action${each.id}" id="action${each.id}">${each.text}</textarea>
   </div>
   <div class="col-1 buttonbox saveBtn">
-    <div id="saveBtn" data-log="${each.id}" class="px-3 clicker align-items-center row save"><i class=" far fa-save"></i></div>
+    <div class="saveBtn" id="saveBtn" data-log="${each.id}" class="px-3 clicker align-items-center row save"><i class=" far fa-save"></i></div>
     <div id="binBtn" data-log="${each.id}" class="px-3 clicker align-items-center row delete"><i class="fas fa-dumpster"></i></div>
   </div>
 </div>`;
@@ -74,15 +74,17 @@ const renderTimeBlocks = function (scheduleData) {
 };
 
 const onReady = function () {
-  initialiseLocalStorage(baseArray);
+  const storedData = initialiseLocalStorage(baseArray);
 
-  renderTimeBlocks(initialiseLocalStorage(baseArray));
+  renderTimeBlocks(storedData);
+
+  setInterval(timerTick, 1000);
 
   const handleClick = function (event) {
     const target = $(event.target);
     const log = target.attr("data-log");
-    let activityTarget = "action" + log;
-    let textBox = document.getElementById(activityTarget);
+    const activityTarget = "action" + log;
+    const textBox = document.getElementById(activityTarget);
 
     if (target.is("#saveBtn")) {
       const arr = JSON.parse(localStorage.getItem("schedule"));
@@ -103,6 +105,3 @@ const onReady = function () {
 };
 
 $(document).ready(onReady);
-
-
-
